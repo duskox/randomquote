@@ -4,6 +4,13 @@ plugins {
 	id 'java'
 }
 
+ext {
+	spring_version = '2.6.2'
+	lombok_version = '1.18.22'
+	h2_version = '2.0.204'
+	reactor_version = '3.4.13'
+}
+
 group = 'com.playground'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
@@ -19,16 +26,16 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.h2database:h2'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'io.projectreactor:reactor-test'
+	implementation "org.springframework.boot:spring-boot-starter-actuator:${spring_version}"
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa:${spring_version}"
+	implementation "org.springframework.boot:spring-boot-starter-webflux:${spring_version}"
+	compileOnly "org.projectlombok:lombok:${lombok_version}"
+	developmentOnly "org.springframework.boot:spring-boot-devtools:${spring_version}"
+	runtimeOnly "com.h2database:h2:${h2_version}"
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${spring_version}"
+	annotationProcessor "org.projectlombok:lombok:${lombok_version}"
+	testImplementation "org.springframework.boot:spring-boot-starter-test:${spring_version}"
+	testImplementation "io.projectreactor:reactor-test:${reactor_version}"
 }
 
 test {

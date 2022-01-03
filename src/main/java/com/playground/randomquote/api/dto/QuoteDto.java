@@ -7,4 +7,5 @@ import lombok.Value;
 @Builder
 public class QuoteDto {
     String quote;
+    String author;
 }

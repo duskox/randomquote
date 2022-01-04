@@ -15,8 +15,6 @@ import java.util.List;
 @Service
 public class QuoteProviderService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(QuoteProviderService.class);
-
     private final WebClient.Builder webClientBuilder;
     private final RandomnessService randomnessService;
 
@@ -33,20 +31,10 @@ public class QuoteProviderService {
                 .defaultHeaders(httpHeaders -> httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON)))
                 .build();
 
-        LOGGER.info("----->>> quote origin:{}", randomQuoteOrigin.getName());
-
         return webClient.get()
                 .retrieve()
                 .bodyToMono(randomQuoteOrigin.getDtoType())
-                .map(o -> {
-                    LOGGER.info("----->>> 01 object:{}", o);
-                    return o;
-                })
-                .map(randomQuoteOrigin.getDtoToQuoteFunction())
-                .map(o -> {
-                    LOGGER.info("----->>> 02 object:{}", o);
-                    return o;
-                });
+                .map(randomQuoteOrigin.getDtoToQuoteFunction());
     }
 
     private QuoteOrigin getRandomQuoteOrigin() {

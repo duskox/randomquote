@@ -14,6 +14,8 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.util.HashMap;
+
 public class WebFluxErrorHandler extends DefaultErrorWebExceptionHandler {
 
     public WebFluxErrorHandler(ErrorAttributes errorAttributes,
@@ -33,12 +35,15 @@ public class WebFluxErrorHandler extends DefaultErrorWebExceptionHandler {
     }
 
     private Mono<ServerResponse> handleError(Throwable throwable) {
+        var details = new HashMap<String, String>();
+        details.put("detail", throwable.getMessage());
         return ServerResponse
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(BodyInserters.fromValue(
                         ErrorDto
                                 .builder()
                                 .failureReason("Oooops!")
+                                .details(details)
                                 .build()
                 ));
     }

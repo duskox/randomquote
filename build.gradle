@@ -9,6 +9,7 @@ ext {
 	lombok_version = '1.18.22'
 	h2_version = '2.0.204'
 	reactor_version = '3.4.13'
+	okhttp_version = '4.9.3'
 }
 
 group = 'com.playground'
@@ -34,8 +35,11 @@ dependencies {
 	runtimeOnly "com.h2database:h2:${h2_version}"
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${spring_version}"
 	annotationProcessor "org.projectlombok:lombok:${lombok_version}"
+
 	testImplementation "org.springframework.boot:spring-boot-starter-test:${spring_version}"
 	testImplementation "io.projectreactor:reactor-test:${reactor_version}"
+	testImplementation "com.squareup.okhttp3:mockwebserver:${okhttp_version}"
+	testImplementation "com.squareup.okhttp3:okhttp:${okhttp_version}"
 }
 
 test {

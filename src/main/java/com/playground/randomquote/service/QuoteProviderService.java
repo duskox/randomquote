@@ -1,15 +1,12 @@
 package com.playground.randomquote.service;
 
 import com.playground.randomquote.api.dto.QuoteDto;
-import com.playground.randomquote.store.QuoteOrigin;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.playground.randomquote.store.QuoteSource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -37,9 +34,7 @@ public class QuoteProviderService {
                 .map(randomQuoteOrigin.getDtoToQuoteFunction());
     }
 
-    private QuoteOrigin getRandomQuoteOrigin() {
-        var list = Arrays.asList(QuoteOrigin.values());
-        return list.get(randomnessService.getRandom(list.size()));
+    private QuoteSource getRandomQuoteOrigin() {
+        return randomnessService.getRandomQuoteOrigin();
     }
-
 }

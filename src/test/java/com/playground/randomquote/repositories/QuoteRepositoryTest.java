@@ -12,6 +12,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,8 +23,23 @@ class QuoteRepositoryTest {
     private static final String TEST_QUOTE = "test quote";
     private static final String TEST_AUTHOR = "test author";
 
-    @Parameterized.Parameter()
+    @Parameterized.Parameter(value = 0)
     public QuoteRepository quoteRepository;
+
+//    private QuoteRepository quoteRepository;
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> instancesBeingTested() {
+        Object[] data = new Object[] {
+                new InMemoryQuoteRepository()
+        };
+
+        var data2 = Arrays.asList(data);
+        var data3 = Collections.singletonList(data);
+
+        return data3;
+
+    }
 
     public QuoteRepositoryTest(QuoteRepository quoteRepository) {
         this.quoteRepository = quoteRepository;
@@ -31,26 +47,19 @@ class QuoteRepositoryTest {
 
 //    @Parameterized.Parameters
 //    public static Collection<Object[]> instancesBeingTested() {
-//        return Arrays.asList(new Object[]{
+//        return (Collection<Object[]>) Arrays.asList(new Object[]{
 //                new InMemoryQuoteRepository(),
 //                new InMemoryQuoteRepository()
 //        });
 //    }
-
-    @Parameterized.Parameters
-    public static Collection<Object> instancesBeingTested() {
-        return Arrays.asList(new Object[]{
-                new InMemoryQuoteRepository(),
-                new InMemoryQuoteRepository()
-        });
-    }
 
 //    @BeforeEach
 //    void setUp() {
 //        quoteRepository = new InMemoryQuoteRepository();
 //    }
 
-    @ParameterizedTest
+    @Test
+//    @ParameterizedTest
     void givenValidIndex_whenGettingQuote_thenReturnWantedQuote() {
         // given
         var quote1 = Quote

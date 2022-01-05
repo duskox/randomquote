@@ -1,23 +1,56 @@
 package com.playground.randomquote.repositories;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RunWith(Parameterized.class)
 class QuoteRepositoryTest {
 
     private static final String TEST_QUOTE = "test quote";
     private static final String TEST_AUTHOR = "test author";
 
-    QuoteRepository quoteRepository;
+    @Parameterized.Parameter()
+    public QuoteRepository quoteRepository;
 
-    @BeforeEach
-    void setUp() {
-        quoteRepository = new InMemoryQuoteRepository();
+    public QuoteRepositoryTest(QuoteRepository quoteRepository) {
+        this.quoteRepository = quoteRepository;
     }
 
-    @Test
+//    @Parameterized.Parameters
+//    public static Collection<Object[]> instancesBeingTested() {
+//        return Arrays.asList(new Object[]{
+//                new InMemoryQuoteRepository(),
+//                new InMemoryQuoteRepository()
+//        });
+//    }
+
+    @Parameterized.Parameters
+    public static Collection<Object> instancesBeingTested() {
+        return Arrays.asList(new Object[]{
+                new InMemoryQuoteRepository(),
+                new InMemoryQuoteRepository()
+        });
+    }
+
+//    @BeforeEach
+//    void setUp() {
+//        quoteRepository = new InMemoryQuoteRepository();
+//    }
+
+    @ParameterizedTest
     void givenValidIndex_whenGettingQuote_thenReturnWantedQuote() {
         // given
         var quote1 = Quote

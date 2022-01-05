@@ -17,7 +17,7 @@ public class RandomnessService {
         this.sourcesStore =sourcesStore;
     }
 
-    public QuoteSource getRandomQuoteOrigin() {
+    public QuoteSource getRandomQuoteSource() {
         var index = random.nextInt(sourcesStore.quoteSources.size());
         return sourcesStore.quoteSources.get(index);
     }

@@ -35,6 +35,6 @@ public class QuoteProviderService {
     }
 
     private QuoteSource getRandomQuoteOrigin() {
-        return randomnessService.getRandomQuoteOrigin();
+        return randomnessService.getRandomQuoteSource();
     }
 }

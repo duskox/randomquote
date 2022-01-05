@@ -31,7 +31,7 @@ public class QuoteProviderService {
         return webClient.get()
                 .retrieve()
                 .bodyToMono(randomQuoteOrigin.getDtoType())
-                .map(randomQuoteOrigin.getDtoToQuoteFunction());
+                .map(baseDto -> baseDto.process(baseDto));
     }
 
     private QuoteSource getRandomQuoteOrigin() {

@@ -18,15 +18,13 @@ public class SourcesStore {
         var source1 = new QuoteSource(
                 "Ron Swanson",
                 "https://ron-swanson-quotes.herokuapp.com/v2/quotes",
-                RonSwansonDto.class,
-                RonSwansonDto.toQuote
+                RonSwansonDto.class
         );
 
         var source2 = new QuoteSource(
                 "Breaking Bad",
                 "https://breaking-bad-quotes.herokuapp.com/v1/quotes",
-                BreakingBadDto.class,
-                BreakingBadDto.toQuote
+                BreakingBadDto.class
         );
 
         quoteSources.add(source1);

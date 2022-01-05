@@ -1,15 +1,13 @@
 package com.playground.randomquote.store;
 
+import com.playground.randomquote.store.dto.BaseDto;
 import lombok.Builder;
 import lombok.Value;
-
-import java.util.function.Function;
 
 @Value
 @Builder
 public class QuoteSource {
     String name;
     String url;
-    Class<?> dtoType;
-    Function dtoToQuoteFunction;
+    Class<? extends BaseDto> dtoType;
 }
